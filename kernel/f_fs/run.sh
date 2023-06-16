@@ -38,7 +38,7 @@ ln -s /sys/kernel/config/usb_gadget/g1/functions/uvc.usb0/streaming/header/h/ /s
 ln -s /sys/kernel/config/usb_gadget/g1/functions/uvc.usb0/streaming/header/h/ /sys/kernel/config/usb_gadget/g1/functions/uvc.usb0/streaming/class/hs
 mkdir /sys/kernel/config/usb_gadget/g1/functions/uvc.usb0/control/header/h
 ln -s /sys/kernel/config/usb_gadget/g1/functions/uvc.usb0/control/header/h/ /sys/kernel/config/usb_gadget/g1/functions/uvc.usb0/control/class/fs/
-ln -s /sys/kernel/config/usb_gadget/g1/functions/uvc.usb0/control/header/h/ /sys/kernel/config/usb_gadget/g1/functions/uvc.usb0/control/class/ss/
+ln -s /sys/kernel/config/usb_gadget/g1/functions/uvc.usb0/control/header/h/ /sys/kernel/config/usb_gadget/g1/functions/uvc.usb0/control/class/hs/
 ln -s /sys/kernel/config/usb_gadget/g1/functions/uvc.usb0/ /sys/kernel/config/usb_gadget/g1/configs/b.2/uvc.usb0
 
 
@@ -55,8 +55,8 @@ mkdir /dev/usb-ffs/adb -m 0770
 mount -t functionfs adb /dev/usb-ffs/adb
 adbd  &
 
-
-UDC_NAME=`ls /sys/class/udc/| awk '{print $1}'`
-echo $UDC_NAME > /sys/kernel/config/usb_gadget/g1/UDC
+sleep 1
+##UDC_NAME=`ls /sys/class/udc/| awk '{print $1}'`
+##echo $UDC_NAME > /sys/kernel/config/usb_gadget/g1/UDC
 
 echo f0600000.nvt_usb2dev > /sys/kernel/config/usb_gadget/g1/UDC
