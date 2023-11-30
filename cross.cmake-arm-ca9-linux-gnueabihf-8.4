@@ -1,10 +1,10 @@
 set(CMAKE_CROSSCOMPILING TRUE)
-set(TOOLSCHAIN_PATH "/usr/")
-set(TOOLCHAIN_HOST "${TOOLSCHAIN_PATH}bin/")
+set(TOOLSCHAIN_PATH "/opt/arm-ca9-linux-gnueabihf-8.4/")
+set(TOOLCHAIN_HOST "${TOOLSCHAIN_PATH}bin/arm-ca9-linux-gnueabihf")
 
 message(STATUS "Using sysroot path: ${SYSROOT_PATH}")
-set(TOOLCHAIN_CC "${TOOLCHAIN_HOST}gcc")
-set(TOOLCHAIN_CXX "${TOOLCHAIN_HOST}g++")
+set(TOOLCHAIN_CC "${TOOLCHAIN_HOST}-gcc")
+set(TOOLCHAIN_CXX "${TOOLCHAIN_HOST}-g++")
 
 set(CMAKE_SYSTEM_NAME "Linux")
 set(CMAKE_C_COMPILER ${TOOLCHAIN_CC})
