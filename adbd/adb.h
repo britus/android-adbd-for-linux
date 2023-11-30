@@ -140,7 +140,7 @@ struct asocket {
 */
 struct  adisconnect
 {
-    void        (*func)(void*  opaque, atransport*  t);
+    void          (*func)(void*  opaque, atransport*  t);
     void*         opaque;
     adisconnect*  next;
     adisconnect*  prev;
@@ -184,11 +184,11 @@ struct atransport
     int online;
     transport_type type;
 
-        /* usb handle or socket fd as needed */
+    /* usb handle or socket fd as needed */
     usb_handle *usb;
     int sfd;
 
-        /* used to identify transports for clients */
+    /* used to identify transports for clients */
     char *serial;
     char *product;
     char *model;
@@ -196,7 +196,7 @@ struct atransport
     char *devpath;
     int adb_port; // Use for emulators (local transport)
 
-        /* a list of adisconnect callbacks called when the transport is kicked */
+    /* a list of adisconnect callbacks called when the transport is kicked */
     int          kicked;
     adisconnect  disconnects;
 
@@ -295,7 +295,6 @@ int check_header(apacket *p);
 int check_data(apacket *p);
 
 /* define ADB_TRACE to 1 to enable tracing support, or 0 to disable it */
-
 #define  ADB_TRACE    1
 
 /* IMPORTANT: if you change the following list, don't
@@ -314,6 +313,7 @@ typedef enum {
     TRACE_JDWP,      /* 0x100 */
     TRACE_SERVICES,
     TRACE_AUTH,
+    TRACE_PRIV,
 } AdbTrace;
 
 #if ADB_TRACE
@@ -327,14 +327,14 @@ typedef enum {
 /* Delivers a trace message to the emulator via QEMU pipe. */
 void adb_qemu_trace(const char* fmt, ...);
 /* Macro to use to send ADB trace messages to the emulator. */
-#define DQ(...)    adb_qemu_trace(__VA_ARGS__)
+#define DQ(...) adb_qemu_trace(__VA_ARGS__)
 
-  extern int     adb_trace_mask;
-  extern unsigned char    adb_trace_output_count;
-  void    adb_trace_init(void);
+  extern int adb_trace_mask;
+  extern unsigned char adb_trace_output_count;
+  void adb_trace_init(void);
 
-//#  define ADB_TRACING  ((adb_trace_mask & (1 << TRACE_TAG)) != 0)
-#  define ADB_TRACING  0
+#define ADB_TRACING  ((adb_trace_mask & (1 << TRACE_TAG)) != 0)
+//#define ADB_TRACING  1
 
 #include <string.h>
 
@@ -429,11 +429,9 @@ extern int SHELL_EXIT_NOTIFY_FD;
 
 #define CHUNK_SIZE (64*1024)
 
-#define USB_ADB_PATH     "/dev/android_adb"
-
+#define USB_ADB_PATH      "/dev/android_adb"
 #define USB_FFS_ADB_PATH  "/dev/usb-ffs/adb/"
 #define USB_FFS_ADB_EP(x) USB_FFS_ADB_PATH#x
-
 #define USB_FFS_ADB_EP0   USB_FFS_ADB_EP(ep0)
 #define USB_FFS_ADB_OUT   USB_FFS_ADB_EP(ep1)
 #define USB_FFS_ADB_IN    USB_FFS_ADB_EP(ep2)

@@ -47,7 +47,7 @@ bool set_property(const char* key, const char* value);
 static int persistent_properties_loaded = 0;
 static int     listen_sock;
 static pthread_t thread_id;
-#define PERSISTENT_PROPERTY_DIR   "/fac/prop/"
+#define PERSISTENT_PROPERTY_DIR   "/system/etc/"
 
 list_declare(prop_list);
 

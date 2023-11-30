@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#define  TRACE_TAG   TRACE_ADB
+#define  TRACE_TAG TRACE_PRIV
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -128,6 +128,7 @@ void  adb_trace_init(void)
         { "jdwp", TRACE_JDWP },
         { "services", TRACE_SERVICES },
         { "auth", TRACE_AUTH },
+        { "none", TRACE_PRIV },
         { NULL, 0 }
     };
 
@@ -500,12 +501,12 @@ void start_device_log(void)
     if (sscanf(value, "%x", &adb_trace_mask) != 1)
         return;
 
-    adb_mkdir("/data/adb", 0775);
+    adb_mkdir("/system/data/adb", 0775);
     tzset();
     time(&t);
     localtime_r(&t, &now);
     strftime(path, sizeof(path),
-                "/data/adb/adb-%Y-%m-%d-%H-%M-%S.txt",
+                "/system/data/adb/adb-%Y-%m-%d-%H-%M-%S.txt",
                 &now);
     fd = unix_open(path, O_WRONLY | O_CREAT | O_TRUNC, 0640);
     if (fd < 0)

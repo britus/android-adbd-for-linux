@@ -273,6 +273,7 @@ int service_to_fd(const char *name)
         goto clean;
     }
 
+#if 0
     if(!HOST && !strncmp(name, "shell:", 6) && !SIMPLE_AUTH) {
         if(0 == strncmp(name + 6, "auth:", 5)) {
             SIMPLE_AUTH = 1;
@@ -280,11 +281,11 @@ int service_to_fd(const char *name)
             goto clean;
         }
 	}
-
 	if(SIMPLE_AUTH == 0) {
         ret = create_subproc_thread("echo pls auth first!");
 		goto clean;
 	}
+#endif
 
     if(!strncmp(name, "tcp:", 4)) {
         int port = atoi(name + 4);
