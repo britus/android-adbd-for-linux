@@ -10,4 +10,4 @@
 # Normal rules
 #
 *.o
-adbd
+build/
